@@ -3,6 +3,7 @@ package com.solfashop;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,6 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public static final int FRAGMENT_HOME = 0;
     public static final int FRAGMENT_ORDER = 1;
     public static final int FRAGMENT_PRICELIST = 2;
+    public static final String EXTRA_MODEL = "extra.model";
     public static final String KEY_FRAGMENT = "solfa.fragment";
     protected int currentFragment = FRAGMENT_HOME;
     public static BaseActivity baseActivity;
@@ -61,6 +63,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         Intent i = new Intent(this, ActivityMain.class);
         i.putExtra(KEY_FRAGMENT, TYPE);
         i.putExtra("judul", judul);
+        startActivity(i);
+    }
+
+    public void startFragment(Intent i) {
         startActivity(i);
     }
 

@@ -1,11 +1,19 @@
 package com.solfashop.model;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
+
+import com.solfashop.ActivityMain;
+import com.solfashop.BaseActivity;
+
+import java.io.Serializable;
 
 /**
  * Created by Ratri on 10/3/2016.
  */
-public class Order {
+public class Order implements Serializable {
     String produk;
     int harga;
     int jumlah;
@@ -52,12 +60,11 @@ public class Order {
         this.picture = picture;
     }
 
-    public View.OnClickListener cardOnClock(){
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("klik di "+getProduk());
-            }
-        };
+    public void cardOnClock(final BaseActivity activity){
+        Intent i = new Intent(activity, ActivityMain.class);
+        i.putExtra(BaseActivity.EXTRA_MODEL, this);
+        i.putExtra(BaseActivity.KEY_FRAGMENT, BaseActivity.FRAGMENT_PRICELIST);
+        i.putExtra("judul", "Price");
+        activity.startFragment(i);
     }
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.solfashop.API.Interfaces.OrderService;
 import com.solfashop.API.ServiceGenertor;
+import com.solfashop.BaseActivity;
 import com.solfashop.R;
 import com.solfashop.holder.OrderHolder;
 import com.solfashop.model.Order;
@@ -26,9 +27,11 @@ import retrofit2.Retrofit;
  */
 public class OrderAdapter extends ListAdapter<Order, OrderHolder> {
     Context context;
+    BaseActivity activity;
 
-    public OrderAdapter(Context ctx){
+    public OrderAdapter(BaseActivity activity, Context ctx){
         context = ctx;
+        this.activity = activity;
     }
 
     @Override
@@ -40,12 +43,17 @@ public class OrderAdapter extends ListAdapter<Order, OrderHolder> {
 
     @Override
     public void onBindViewHolder(OrderHolder holder, int position) {
-        Order order = get(position);
+        final Order order = get(position);
         holder.textProduk.setText(order.getProduk());
         holder.textHarga.setText(""+order.getHarga());
         holder.textJumlah.setText(""+order.getJumlah());
         holder.textTotal.setText(""+order.getTotal());
-        holder.card.setOnClickListener(order.cardOnClock());
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                order.cardOnClock(activity);
+            }
+        });
         Glide.with(context).load(order.getPicture()).override(100, 100).into(holder.imgCover);
     }
 

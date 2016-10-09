@@ -15,6 +15,9 @@ import com.solfashop.fragment.BaseFragment;
 import com.solfashop.fragment.HomeFragment;
 import com.solfashop.fragment.OrderFragment;
 import com.solfashop.fragment.PriceFragment;
+import com.solfashop.model.Order;
+
+import org.parceler.Parcels;
 
 /**
  * Created by Ratri on 9/30/2016.
@@ -42,8 +45,11 @@ public class ActivityMain extends BaseActivity{
                 isParrentView = false;
                 break;
             case FRAGMENT_PRICELIST:
-                manager.beginTransaction().replace(R.id.container, PriceFragment.newInstance("INI PRICE")).commit();
-                isParrentView = false;
+                    Order order = (Order) caller.getSerializableExtra(BaseActivity.EXTRA_MODEL);
+                    PriceFragment priceFragment = PriceFragment.newInstance(order);
+                    manager.beginTransaction().replace(R.id.container, priceFragment).commit();
+                    isParrentView = false;
+
                 break;
         }
 

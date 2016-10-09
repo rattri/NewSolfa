@@ -37,7 +37,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener{
         setTitle("Order");
 
         recyclerView = (RecyclerView) v.findViewById(R.id.rv_order);
-        orderAdapter = new OrderAdapter(getContext());
+        orderAdapter = new OrderAdapter(getBaseActivity(), getContext());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(orderAdapter);
